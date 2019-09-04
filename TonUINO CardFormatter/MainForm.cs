@@ -192,10 +192,24 @@ namespace ElKanzo.TonuinoCardFormatter
 		}
 	}
 
+	public class SdCard
+	{
+		public String Name { get; set; }
+		public String Directory { get; set; }
+		public List<Folder> Folders { get; set; }
+	}
+
+	public class Folder
+	{
+		public Byte Number { get; set; }
+		public List<Album> Albums { get; set; }
+	}
+
 	public class Album
 	{
 		public String Title { get; set; }
 		public Byte[] Image { get; set; }
+		public Byte Folder { get; set; }
 		public List<Track> Tracks { get; set; }
 	}
 
@@ -203,7 +217,6 @@ namespace ElKanzo.TonuinoCardFormatter
 	{
 		public String Title { get; set; }
 		public Int16 TrackNo { get; set; }
-		public Byte Folder { get; set; }
 	}
 
 	public class TonuinoCard

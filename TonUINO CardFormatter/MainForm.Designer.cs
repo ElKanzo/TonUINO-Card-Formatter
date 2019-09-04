@@ -26,9 +26,6 @@ namespace ElKanzo.TonuinoCardFormatter
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.tabControl = new System.Windows.Forms.TabControl();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
-			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.importButton = new System.Windows.Forms.Button();
 			this.sdDirLabel = new System.Windows.Forms.Label();
 			this.sdDirTextBox = new System.Windows.Forms.TextBox();
@@ -38,48 +35,12 @@ namespace ElKanzo.TonuinoCardFormatter
 			this.activeCardControl = new ElKanzo.TonuinoCardFormatter.CardControl();
 			this.newSettingsCardControl = new ElKanzo.TonuinoCardFormatter.CardControl();
 			this.writeSettingsButton = new System.Windows.Forms.Button();
-			this.tabControl.SuspendLayout();
-			this.tabPage2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// tabControl
-			// 
-			this.tabControl.Controls.Add(this.tabPage1);
-			this.tabControl.Controls.Add(this.tabPage2);
-			this.tabControl.Location = new System.Drawing.Point(364, 0);
-			this.tabControl.Name = "tabControl";
-			this.tabControl.SelectedIndex = 0;
-			this.tabControl.Size = new System.Drawing.Size(376, 489);
-			this.tabControl.TabIndex = 0;
-			// 
-			// tabPage1
-			// 
-			this.tabPage1.Location = new System.Drawing.Point(4, 22);
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage1.Size = new System.Drawing.Size(368, 463);
-			this.tabPage1.TabIndex = 0;
-			this.tabPage1.Text = "RFID Card";
-			this.tabPage1.UseVisualStyleBackColor = true;
-			// 
-			// tabPage2
-			// 
-			this.tabPage2.Controls.Add(this.importButton);
-			this.tabPage2.Controls.Add(this.sdDirLabel);
-			this.tabPage2.Controls.Add(this.sdDirTextBox);
-			this.tabPage2.Controls.Add(this.selectSdDirButton);
-			this.tabPage2.Location = new System.Drawing.Point(4, 22);
-			this.tabPage2.Name = "tabPage2";
-			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(368, 463);
-			this.tabPage2.TabIndex = 1;
-			this.tabPage2.Text = "SD Card";
-			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
 			// importButton
 			// 
-			this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.importButton.Location = new System.Drawing.Point(627, 432);
+			this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.importButton.Location = new System.Drawing.Point(575, 406);
 			this.importButton.Name = "importButton";
 			this.importButton.Size = new System.Drawing.Size(97, 23);
 			this.importButton.TabIndex = 4;
@@ -90,26 +51,26 @@ namespace ElKanzo.TonuinoCardFormatter
 			// sdDirLabel
 			// 
 			this.sdDirLabel.AutoSize = true;
-			this.sdDirLabel.Location = new System.Drawing.Point(8, 12);
+			this.sdDirLabel.Location = new System.Drawing.Point(233, 17);
 			this.sdDirLabel.Name = "sdDirLabel";
-			this.sdDirLabel.Size = new System.Drawing.Size(64, 13);
+			this.sdDirLabel.Size = new System.Drawing.Size(53, 13);
 			this.sdDirLabel.TabIndex = 3;
-			this.sdDirLabel.Text = "Verzeichnis:";
+			this.sdDirLabel.Text = "SD Karte:";
 			// 
 			// sdDirTextBox
 			// 
-			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.sdDirTextBox.Enabled = false;
-			this.sdDirTextBox.Location = new System.Drawing.Point(78, 8);
+			this.sdDirTextBox.Location = new System.Drawing.Point(292, 14);
 			this.sdDirTextBox.Name = "sdDirTextBox";
-			this.sdDirTextBox.Size = new System.Drawing.Size(543, 20);
+			this.sdDirTextBox.Size = new System.Drawing.Size(277, 20);
 			this.sdDirTextBox.TabIndex = 2;
 			// 
 			// selectSdDirButton
 			// 
 			this.selectSdDirButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.selectSdDirButton.Location = new System.Drawing.Point(627, 6);
+			this.selectSdDirButton.Location = new System.Drawing.Point(575, 12);
 			this.selectSdDirButton.Name = "selectSdDirButton";
 			this.selectSdDirButton.Size = new System.Drawing.Size(97, 23);
 			this.selectSdDirButton.TabIndex = 1;
@@ -126,14 +87,14 @@ namespace ElKanzo.TonuinoCardFormatter
 			// 
 			// newSettingsCardControl
 			// 
-			this.newSettingsCardControl.Location = new System.Drawing.Point(12, 254);
+			this.newSettingsCardControl.Location = new System.Drawing.Point(12, 251);
 			this.newSettingsCardControl.Name = "newSettingsCardControl";
 			this.newSettingsCardControl.Size = new System.Drawing.Size(165, 178);
 			this.newSettingsCardControl.TabIndex = 2;
 			// 
 			// writeSettingsButton
 			// 
-			this.writeSettingsButton.Location = new System.Drawing.Point(12, 225);
+			this.writeSettingsButton.Location = new System.Drawing.Point(12, 222);
 			this.writeSettingsButton.Name = "writeSettingsButton";
 			this.writeSettingsButton.Size = new System.Drawing.Size(165, 23);
 			this.writeSettingsButton.TabIndex = 3;
@@ -145,25 +106,23 @@ namespace ElKanzo.TonuinoCardFormatter
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(740, 470);
+			this.ClientSize = new System.Drawing.Size(684, 441);
+			this.Controls.Add(this.selectSdDirButton);
+			this.Controls.Add(this.sdDirLabel);
+			this.Controls.Add(this.sdDirTextBox);
+			this.Controls.Add(this.importButton);
 			this.Controls.Add(this.writeSettingsButton);
 			this.Controls.Add(this.newSettingsCardControl);
 			this.Controls.Add(this.activeCardControl);
-			this.Controls.Add(this.tabControl);
+			this.MinimumSize = new System.Drawing.Size(700, 480);
 			this.Name = "MainForm";
 			this.Text = "TonUINO Card Formatter";
-			this.tabControl.ResumeLayout(false);
-			this.tabPage2.ResumeLayout(false);
-			this.tabPage2.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.TabPage tabPage1;
-		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.Label sdDirLabel;
 		private System.Windows.Forms.TextBox sdDirTextBox;
 		private System.Windows.Forms.Button selectSdDirButton;
