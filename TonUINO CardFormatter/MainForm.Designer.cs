@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ElKanzo.TonuinoCardFormatter
+﻿namespace ElKanzo.TonuinoCardFormatter
 {
 	partial class MainForm
 	{
@@ -9,14 +7,6 @@ namespace ElKanzo.TonuinoCardFormatter
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 
-		protected override void Dispose(Boolean disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
 
 		#region Vom Windows Form-Designer generierter Code
 
@@ -59,8 +49,8 @@ namespace ElKanzo.TonuinoCardFormatter
 			// 
 			// sdDirTextBox
 			// 
-			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.sdDirTextBox.Enabled = false;
 			this.sdDirTextBox.Location = new System.Drawing.Point(292, 14);
 			this.sdDirTextBox.Name = "sdDirTextBox";

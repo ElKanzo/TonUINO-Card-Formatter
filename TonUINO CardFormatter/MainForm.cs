@@ -57,6 +57,15 @@ namespace ElKanzo.TonuinoCardFormatter
 			InitClassVars();
 		}
 
+		protected override void Dispose(Boolean disposing)
+		{
+			if (disposing && (components != null))
+			{
+				m_miFareCard?.Dispose();
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
 
 		// Events
@@ -76,8 +85,6 @@ namespace ElKanzo.TonuinoCardFormatter
 			m_logger.Debug("Card Added");
 			try
 			{
-				m_touinoCard = new TonuinoCard();
-				SetEnabledState(writeSettingsButton, true);
 				await ReadCard(args);
 			}
 			catch (Exception ex)
@@ -87,6 +94,8 @@ namespace ElKanzo.TonuinoCardFormatter
 			finally
 			{
 				activeCardControl.SetValues(m_touinoCard);
+				if (m_touinoCard?.IsValid() == true)
+					SetEnabledState(writeSettingsButton, true);
 			}
 		}
 
@@ -102,23 +111,35 @@ namespace ElKanzo.TonuinoCardFormatter
 
 		private void HandleImportButtonClick(Object sender, EventArgs e)
 		{
+			//Library.CreateTestData();
+			//Library.ReadTest();
+
+
 			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				PopupMessage(String.Join(", ", openFileDialog.FileNames));
+				using (ImportDialog importDialog = new ImportDialog(openFileDialog.FileNames))
+				{
+					importDialog.ShowDialog(this);
+				}
 			}
 		}
 
-		private void HandleWriteSettingsButtonClick(Object sender, EventArgs e)
+		private async void HandleWriteSettingsButtonClick(Object sender, EventArgs e)
 		{
-			SectorKeySet set = new SectorKeySet();
-			set.KeyType = KeyType.KeyB;
-			set.Sector = 1;
-			set.Key = new Byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
-			m_miFareCard.AddOrUpdateSectorKeySet(set);
-			newSettingsCardControl.GetValues(m_touinoCard);
-			m_miFareCard.SetData(1, 0, m_touinoCard.ToByteArray());
-			m_miFareCard.Flush();
-			activeCardControl.SetValues(m_touinoCard);
+			if (m_miFareCard != null && m_touinoCard != null)
+			{
+				SectorKeySet set = new SectorKeySet
+				{
+					KeyType = KeyType.KeyB,
+					Sector = 1,
+					Key = new Byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }
+				};
+				m_miFareCard.AddOrUpdateSectorKeySet(set);
+				newSettingsCardControl.GetValues(m_touinoCard);
+				await m_miFareCard.SetData(1, 0, m_touinoCard.ToByteArray());
+				await m_miFareCard.Flush();
+				activeCardControl.SetValues(m_touinoCard);
+			}
 		}
 
 
@@ -129,25 +150,24 @@ namespace ElKanzo.TonuinoCardFormatter
 			try
 			{
 				m_miFareCard = args.SmartCard.CreateMiFareCard();
-				var cardIdentification = await m_miFareCard.GetCardInfo();
+				var cardInfo = await m_miFareCard.GetCardInfo();
 
-				if (cardIdentification.PcscDeviceClass == DeviceClass.StorageClass && (cardIdentification.PcscCardName == CardName.MifareStandard1K || cardIdentification.PcscCardName == CardName.MifareStandard4K))
+				if (cardInfo.PcscDeviceClass == DeviceClass.StorageClass && (cardInfo.PcscCardName == CardName.MifareStandard1K || cardInfo.PcscCardName == CardName.MifareStandard4K))
 				{
 					Byte[] uid = await m_miFareCard.GetUid();
 					Byte[] data = await m_miFareCard.GetData(TonuinoCard.Sector, TonuinoCard.StartIndex, TonuinoCard.Length);
 					m_touinoCard = new TonuinoCard(uid, data);
+				}
+				else
+				{
+					Byte[] uid = await m_miFareCard.GetUid();
+					m_touinoCard = new TonuinoCard(uid, false);
 				}
 			}
 			catch (Exception ex)
 			{
 				m_logger.Error("Error while reading new card!", ex);
 			}
-		}
-
-		/// <summary>Display message via dialogue box</summary>
-		private void PopupMessage(String message)
-		{
-			var ignored = BeginInvoke((Action)(() => { MessageBox.Show(message); }));
 		}
 
 		private void SetEnabledState(Control control, Boolean enabled)
@@ -192,32 +212,6 @@ namespace ElKanzo.TonuinoCardFormatter
 		}
 	}
 
-	public class SdCard
-	{
-		public String Name { get; set; }
-		public String Directory { get; set; }
-		public List<Folder> Folders { get; set; }
-	}
-
-	public class Folder
-	{
-		public Byte Number { get; set; }
-		public List<Album> Albums { get; set; }
-	}
-
-	public class Album
-	{
-		public String Title { get; set; }
-		public Byte[] Image { get; set; }
-		public Byte Folder { get; set; }
-		public List<Track> Tracks { get; set; }
-	}
-
-	public class Track
-	{
-		public String Title { get; set; }
-		public Int16 TrackNo { get; set; }
-	}
 
 	public class TonuinoCard
 	{
@@ -234,18 +228,20 @@ namespace ElKanzo.TonuinoCardFormatter
 
 		private readonly Byte[] m_id;  // Holds the raw data from the card.
 		private Byte[] m_data;  // Holds the raw data from the card.
+		private readonly Boolean m_valid;
 
 
-		public TonuinoCard()
+		public TonuinoCard(Byte[] uid, Boolean valid)
 		{
-			m_id = null;
-			m_data = null;
+			m_id = uid;
+			m_valid = valid;
 		}
 
 		public TonuinoCard(Byte[] uid, Byte[] data)
 		{
 			m_id = uid;
 			m_data = data;
+			m_valid = true;
 		}
 
 
@@ -335,8 +331,12 @@ namespace ElKanzo.TonuinoCardFormatter
 		}
 
 
-
 		public Boolean IsValid()
+		{
+			return m_valid;
+		}
+
+		public Boolean IsFormatted()
 		{
 			if (m_data?.Length >= Length) // At least 9 Bytes are used.
 				return (m_data[0] << 24) + (m_data[1] << 16) + (m_data[2] << 8) + m_data[3] == Cookie;

@@ -39,6 +39,13 @@ namespace ElKanzo.TonuinoCardFormatter
 				}
 				else if (!card.IsValid())
 				{
+					cardPresentLabel.Text = "Falscher Karten-Typ";
+					cardPresentLabel.ForeColor = Color.Red;
+					idValueLabel.Text = card.ID;
+					ClearData();
+				}
+				else if (!card.IsFormatted())
+				{
 					cardPresentLabel.Text = "Unbekannte Karte";
 					cardPresentLabel.ForeColor = Color.Red;
 					idValueLabel.Text = card.ID;
@@ -60,7 +67,7 @@ namespace ElKanzo.TonuinoCardFormatter
 
 		public void GetValues(TonuinoCard card)
 		{
-			if (!card.IsValid())
+			if (!card.IsFormatted())
 				card.Format();
 			card.Version = (Version)versionComboBox.SelectedValue;
 			card.Mode = (Mode)modeComboBox.SelectedValue;
