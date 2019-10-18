@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ElKanzo.TonuinoCardFormatter.Properties;
@@ -111,15 +110,14 @@ namespace ElKanzo.TonuinoCardFormatter
 
 		private void HandleImportButtonClick(Object sender, EventArgs e)
 		{
-			//Library.CreateTestData();
-			//Library.ReadTest();
-
-
 			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				using (ImportDialog importDialog = new ImportDialog(openFileDialog.FileNames))
 				{
-					importDialog.ShowDialog(this);
+					if (importDialog.ShowDialog(this) == DialogResult.OK)
+					{
+						Album album = importDialog.GetAlbum();
+					}
 				}
 			}
 		}
@@ -167,6 +165,7 @@ namespace ElKanzo.TonuinoCardFormatter
 			catch (Exception ex)
 			{
 				m_logger.Error("Error while reading new card!", ex);
+				throw;
 			}
 		}
 

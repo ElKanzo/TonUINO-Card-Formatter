@@ -25,6 +25,8 @@
 			this.activeCardControl = new ElKanzo.TonuinoCardFormatter.CardControl();
 			this.newSettingsCardControl = new ElKanzo.TonuinoCardFormatter.CardControl();
 			this.writeSettingsButton = new System.Windows.Forms.Button();
+			this.sdCardComboBox = new System.Windows.Forms.ComboBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// importButton
@@ -49,10 +51,10 @@
 			// 
 			// sdDirTextBox
 			// 
-			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.sdDirTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.sdDirTextBox.Enabled = false;
-			this.sdDirTextBox.Location = new System.Drawing.Point(292, 14);
+			this.sdDirTextBox.Location = new System.Drawing.Point(242, 241);
 			this.sdDirTextBox.Name = "sdDirTextBox";
 			this.sdDirTextBox.Size = new System.Drawing.Size(277, 20);
 			this.sdDirTextBox.TabIndex = 2;
@@ -60,7 +62,7 @@
 			// selectSdDirButton
 			// 
 			this.selectSdDirButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.selectSdDirButton.Location = new System.Drawing.Point(575, 12);
+			this.selectSdDirButton.Location = new System.Drawing.Point(525, 239);
 			this.selectSdDirButton.Name = "selectSdDirButton";
 			this.selectSdDirButton.Size = new System.Drawing.Size(97, 23);
 			this.selectSdDirButton.TabIndex = 1;
@@ -92,11 +94,34 @@
 			this.writeSettingsButton.UseVisualStyleBackColor = true;
 			this.writeSettingsButton.Click += new System.EventHandler(this.HandleWriteSettingsButtonClick);
 			// 
+			// sdCardComboBox
+			// 
+			this.sdCardComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.sdCardComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.sdCardComboBox.FormattingEnabled = true;
+			this.sdCardComboBox.Location = new System.Drawing.Point(292, 14);
+			this.sdCardComboBox.Name = "sdCardComboBox";
+			this.sdCardComboBox.Size = new System.Drawing.Size(277, 21);
+			this.sdCardComboBox.TabIndex = 5;
+			// 
+			// button1
+			// 
+			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.button1.Location = new System.Drawing.Point(575, 13);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(97, 23);
+			this.button1.TabIndex = 6;
+			this.button1.Text = "Neu";
+			this.button1.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(684, 441);
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.sdCardComboBox);
 			this.Controls.Add(this.selectSdDirButton);
 			this.Controls.Add(this.sdDirLabel);
 			this.Controls.Add(this.sdDirTextBox);
@@ -122,6 +147,8 @@
 		private CardControl activeCardControl;
 		private CardControl newSettingsCardControl;
 		private System.Windows.Forms.Button writeSettingsButton;
+		private System.Windows.Forms.ComboBox sdCardComboBox;
+		private System.Windows.Forms.Button button1;
 	}
 }
 
